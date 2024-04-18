@@ -1,12 +1,15 @@
 package com.learnSphere.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Lesson {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int lessonId;
 	String lessonName;
 	String topics;

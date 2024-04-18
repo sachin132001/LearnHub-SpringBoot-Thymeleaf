@@ -55,15 +55,9 @@
     <h1>Add a new lesson!</h1>
     
     <form action="/lesson" method="post" onsubmit="handleFormSubmission(event)">
-      <div class="mb-3">
-	    <label for="courseId" class="form-label">Course ID</label>
-	    <input type="text" class="form-control" name="courseId">
-	  </div>
-	  
-	  <div class="mb-3">
-	    <label for="lessonId" class="form-label">Lesson ID</label>
-	    <input type="text" class="form-control" name="lessonId">
-	  </div>
+    <div class="mb-3">
+        <input type="hidden" class="form-control" id="courseId" name="courseId" th:value="${courseId}">
+    </div>
 	  
 	  <div class="mb-3">
 	    <label for="lessonName" class="form-label">Lesson Name</label>

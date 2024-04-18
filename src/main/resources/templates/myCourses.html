@@ -34,7 +34,6 @@ th {
 <table class="table table-success table-striped table-bordered">
   <thead>
     <tr>
-      <th scope="col">Course Id</th>
       <th scope="col">Course Name</th>
       <th scope="col">Course Price</th>
       <th scope="col">Lessons</th>
@@ -42,7 +41,6 @@ th {
   </thead>
   <tbody>
     <tr th:each="course:${courseList}">
-      <td th:text="${course.courseId}"></td>
       <td th:text="${course.courseName}"></td>
       <td th:text="${course.coursePrice}"></td>
       <td>

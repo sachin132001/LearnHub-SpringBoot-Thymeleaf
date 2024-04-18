@@ -2,7 +2,10 @@ package com.learnSphere.entity;
 
 import java.util.List;
 
+import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -10,6 +13,7 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Course {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	int courseId;
 	String courseName;
 	int coursePrice;

@@ -13,49 +13,88 @@
             background-color: #f8f9fa;
             font-family: Arial, sans-serif;
             height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
+           
         }
 
         h1 {
-            color: #343a40;
-            margin-bottom: 20px;
-            text-align: center;
+            color: white;
+            
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+      /*  .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px; 
+        }
+
+        .btn {
+            width: auto; 
+            padding: 10px 20px;
         }
 
         .btn-primary {
             background-color: #343a40;
             border: none;
-        }
+        }    */
 
         .btn-primary:hover {
             background-color: #23272b;
         }
 
-        a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .d-grid {
-            width: 100%;
-            max-width: 200px;
-        }
     </style>
+
 
     <title>Trainer home</title>
   </head>
   <body>
-    <h1>Welcome trainer!</h1>
-    
-    <div class="d-grid gap-2">
-	  <button class="btn btn-primary" type="button"><a href="/createCourse">Add Course</a></button>
-	  <button class="btn btn-primary" type="button"><a href="/addLesson">Add Lesson</a></button>
-	  <button class="btn btn-primary" type="button"><a href="/showCourses">View Courses</a></button>
-	</div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand">LEARN SPHERE</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/createCourse">ADD COURSE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/showCourses2">ADD LESSON</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/showCourses">VIEW COURSES</a>
+                </li>
+            </ul>
+             <div class="mb-3">
+        <form action="/logout" method="post">
+          <button class="btn btn-light" type="submit">LOGOUT</button>
+       </form>
+        </div>
+        </div>
+    </div>
+</nav>
 
+<div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+  </div>
+  <div class="carousel-inner">
+    
+    <div class="carousel-item active">
+      <img src="images/bg1.jpg" class="d-block w-100" alt="..." height="100%" width="100%">
+      <div class="carousel-caption">
+        <h1>WELCOME TO LEARN SPHERE</h1>
+       
+      </div>
+    </div>
+  </div>
+  
+</div>
+  
+  
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->

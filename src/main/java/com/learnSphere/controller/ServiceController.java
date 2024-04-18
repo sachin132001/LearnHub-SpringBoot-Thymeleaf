@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,19 +24,10 @@ public class ServiceController {
 	CommentService cService;
 	
 	@PostMapping("/addUser")
-	public String addUser(@RequestParam("name")String name,
-			@RequestParam("email")String email,
-			@RequestParam("password")String password,
-			@RequestParam("role")String role) {
-		boolean emailExists=uService.checkEmail(email);
+	public String addUser(@ModelAttribute Users user) {
+		boolean emailExists=uService.checkEmail(user.getEmail());
 		if(emailExists==false) {
-			Users user = new Users();
-			user.setName(name);
-			user.setEmail(email);
-			user.setPassword(password);
-			user.setRole(role);
 			uService.addUser(user);
-			
 			System.out.println("user registered successfully!");
 			return "redirect:/login";
 		}
@@ -73,6 +65,11 @@ public class ServiceController {
 			return "login";
 		}
 }
+	 @PostMapping("/logout")
+	    public String logout(HttpSession session) {
+	        session.invalidate(); // Invalidate the session
+	        return "login"; // Redirect to login page
+	    }
 	
 	
 }

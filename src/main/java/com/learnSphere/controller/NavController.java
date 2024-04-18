@@ -1,7 +1,9 @@
 package com.learnSphere.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class NavController {
@@ -28,8 +30,19 @@ public class NavController {
 	
 	@GetMapping("/addLesson")
 	public String addLesson() {
-		return "addLesson";
+		return "lesson";
 	}
+	
+	
+	    
+	    @GetMapping("/addLesson2/{id}")
+	    public String addLesson2(@PathVariable("id") int id, Model model) {
+	        model.addAttribute("courseId", id);
+	        return "addLesson"; // Assuming you have a corresponding HTML file for adding a lesson
+	    }
+
+
+
 	
 	@GetMapping("/studentHome")
 	public String studentHome() {

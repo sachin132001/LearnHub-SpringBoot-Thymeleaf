@@ -34,7 +34,7 @@ public class OrderCreation {
 		
 		Order order=null;
 		try {
-			RazorpayClient razorpay=new RazorpayClient("rzp_test_ANiFbfIjOIx3EF", "jgHc0g5bAebbeilwWX1uXP45");
+			RazorpayClient razorpay=new RazorpayClient("rzp_test_3HOkvAEOeNz4YC", "HFJFoLO7BydjSlZMKifxATBQ");
 			
 			JSONObject orderRequest = new JSONObject();
 			  orderRequest.put("amount", amount*100); // amount in the smallest currency unit

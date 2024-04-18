@@ -29,7 +29,6 @@ body {
         <table class="table table-success table-striped table-bordered">
             <thead>
                 <tr>
-                    <th scope="col">Lesson Id</th>
                     <th scope="col">Lesson Name</th>
                     <th scope="col">Lesson Topics</th>
                     
@@ -37,7 +36,6 @@ body {
             </thead>
             <tbody>
                 <tr>
-                    <td th:text="${lesson.lessonId}"></td>
                     <td th:text="${lesson.lessonName}"></td>
                     <td th:text="${lesson.topics}"></td>
                     
@@ -45,16 +43,16 @@ body {
             </tbody>
         </table>
 
-        <h2 class="mt-4 mb-4">Lesson Video:</h2>
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" 
-                    th:src="@{'https://www.youtube.com/embed/' + ${lesson.link}}" 
-                    title="YouTube video player" frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; 
-                    encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-            </iframe>
-        </div>
+       <h2 class="mt-4 mb-4">Lesson Video:</h2>
+<div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" 
+            th:src="@{'https://www.youtube.com/embed/' + ${lesson.link}}" 
+            title="YouTube video player" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; 
+            encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
+</div>
 
 
         <h2 class="mt-4">Leave a comment here:</h2>
@@ -76,16 +74,35 @@ body {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-        $(document).ready(function(){
-            $("#submitButton").click(function(){
-                var commentText = $("#commentText").val();
-                $.post("/addComment", { comment: commentText })
-                    .done(function(data) {
-                        $(".comments-list").append('<p>' + commentText + '</p><hr>');
-                        $("#commentText").val("");
-                    });
-            });
+    $(document).ready(function(){
+        $("#submitButton").click(function(){
+            var commentText = $("#commentText").val();
+            $.post("/addComment", { comment: commentText })
+                .done(function(data) {
+                    // Append the new comment to the comments section
+                    $(".comments-list").append('<div><p>' + commentText + '</p><hr></div>');
+                    $("#commentText").val("");
+                })
+                .fail(function(xhr, status, error) {
+                    // Handle error
+                    console.error("Error adding comment:", error);
+                });
         });
+    });
+
+
+    // Function to fetch and display comments
+    function fetchComments() {
+        $.get("/fetchComments")
+            .done(function(data) {
+                $(".comments-list").html(data);
+            })
+            .fail(function(xhr, status, error) {
+                // Handle error
+                console.error("Error fetching comments:", error);
+            });
+    }
+
     </script>
 </body>
 </html>

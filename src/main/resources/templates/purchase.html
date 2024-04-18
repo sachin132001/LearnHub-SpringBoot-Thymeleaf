@@ -39,7 +39,6 @@ th {
     <table class="table table-success table-striped table-bordered">
   <thead>
   <tr>
-    <th scope="col">Course Id</th>
     <th scope="col">Course Name</th>
     <th scope="col">Course Price</th>
     <th scope="col">Lessons</th>
@@ -48,7 +47,6 @@ th {
 </thead>
 <tbody>
   <tr th:each="course : ${courseList}">
-    <td th:text="${course.courseId}"></td>
     <td th:text="${course.courseName}"></td>
     <td th:text="${course.coursePrice}"></td>
     <td>
@@ -89,7 +87,7 @@ function createOrder(amount, email, courseId) {
         .done(function(order) {
             order = JSON.parse(order);
             var options = {
-                "key": "rzp_test_ANiFbfIjOIx3EF",
+                "key": "rzp_test_3HOkvAEOeNz4YC",
                 "amount": order.amount_due.toString(),
                 "currency": "INR",
                 "name": "Learn Sphere",

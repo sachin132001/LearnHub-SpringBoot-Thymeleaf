@@ -3,6 +3,7 @@ package com.learnSphere.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,35 +34,42 @@ public class StudentController {
 	
 	@Autowired
 	CommentService cService;
-	
 	@GetMapping("/viewLesson")
-	public String viewLesson(@RequestParam("lessonId")int lessonId,
-							Model model,HttpSession session) {
-	//	Users user = (Users) session.getAttribute("loggedInUser");
-
-		
-		
-		Lesson lesson = service.getLesson(lessonId);
-		// Extract the YouTube video id from the URL
-	    String youtubeUrl = lesson.getLink();
+	public String viewLesson(@RequestParam("lessonId") int lessonId, Model model, HttpSession session) {
+	    Lesson lesson = service.getLesson(lessonId);
 	    
-	    String videoId = youtubeUrl.substring(youtubeUrl.indexOf("=") + 1);
+	    // Extract the video ID from the YouTube URL
+	    String youtubeUrl = lesson.getLink();
+	    String videoId;
+	    if (youtubeUrl.contains("youtu.be/")) {
+	        // Extract video ID from the shortened format
+	        videoId = youtubeUrl.substring(youtubeUrl.lastIndexOf("/") + 1);
+	    } else {
+	        // Extract video ID from the full URL format
+	        videoId = youtubeUrl.substring(youtubeUrl.indexOf("?v=") + 3);
+	    }
+	    
 	    lesson.setLink(videoId);
-		
-		
-		model.addAttribute("lesson",lesson);
-		List<Comments> commentsList=cService.commentList();
-		model.addAttribute("comments",commentsList);
-		
-		return "myLesson";
+	    
+	    model.addAttribute("lesson", lesson);
+	    List<Comments> commentsList = cService.commentList();
+	    model.addAttribute("comments", commentsList);
+	    
+	    return "myLesson";
 	}
+
 	
 	@PostMapping("/addComment")
-	public String comments(@RequestParam("comment")String comment
-						,Model model) {
-		Comments c=new Comments();
-		c.setComment(comment);
-		cService.addComment(c);
+	public ResponseEntity<String> addComment(@RequestParam("comment") String comment) {
+	    Comments c = new Comments();
+	    c.setComment(comment);
+	    cService.addComment(c);
+	    return ResponseEntity.ok().build();
+	}
+
+	
+	@GetMapping("/addComment2")
+	public String commentsView(Model model) {
 		
 		List<Comments> commentsList=cService.commentList();
 		model.addAttribute("comments",commentsList);
